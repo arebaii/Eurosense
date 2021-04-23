@@ -1,0 +1,37 @@
+<?php
+$serveur = "localhost"; 
+$user = "monuser";
+$passe = "monpass"; 
+$base = "mabase";
+$dbconnect = pg_connect("host=$serveur dbname=$base user=$user password=$passe") 
+    or die('Connexion impossible : ' . pg_last_error()); 
+
+header('Content-type: application/json');
+
+$query = "SELECT meschamps, st_asgeojson(s.the_geom) AS geometry FROM matable;";
+$rs = pg_query($dbconnect, $query) or die("La requete suivante ne peut pas etre executee : $query\n");
+
+//Construction du GeoJSON
+$geojson = array(
+    'type'      => 'FeatureCollection',
+    'features'  => array()
+);
+
+while ($row = pg_fetch_assoc($rs)) {
+    
+    $geometry = json_decode($row['geometry']);
+    //On enlève les propriétés des géométries
+    unset($row['geometry']);
+    $properties = $row;        
+    $feature = array(
+        'type' => 'Feature'
+        ,'properties' => $properties
+        ,'geometry' => $geometry
+    );
+    // on push la feature
+    array_push($geojson['features'], $feature);
+}
+
+echo json_encode($geojson);
+
+?>
