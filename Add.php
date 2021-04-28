@@ -1,14 +1,12 @@
 <!-- je fais un test ici -->
 <!--****************************** FORMULAIRE *********************************************-->
 
-<form action="index.php" method="POST" id="Add-FORM">
+<form action="index.php#Add" method="POST" id="Add-FORM">
 
     <div class="field"  id=Add-Format>
     <!-- //Requete SQL -> tableaux déroulant des project ID de la table Project -->
         <h2> BDL (Project ID) </h2>
         <input type="text"  BDL (Project ID) list="idBdl" name="bdl" id="pjID">
-        <!-- y a un 'ok' qui apparait -->
-            <span id="bdlName"></span>
         <datalist id="idBdl">
         <?php   
             foreach ($PJID as $P) {
@@ -20,7 +18,7 @@
     <!-- //Fenêtre du choix du pays -->
 
         <h2>Storage Location </h2>
-        <select name="country" class="text">
+        <select name="storage_location" class="text">
         
             <?php   
                 foreach ($country as $c) {
@@ -50,7 +48,7 @@
                     // ET / OU BIEN : Calendar Menu -->
                     <div>
                         <h2> Mission date </h2>
-                        <select name="country" class="text">
+                        <select name="image_mission_date" class="text">
                         <?php/*   
                         foreach ($country as $c) {
                             echo "<option value=" . $c["country"] . ">" . $c['country'] . "</option>";
@@ -156,7 +154,7 @@
 
             <div>
                 <h3> Text </h3>
-                <input type="imput" name="ortho_text">
+                <input type="text" name="ortho_text">
             </div>
             </div>
         </div>
@@ -170,21 +168,20 @@
                 <div>
                 <h3> Lidar type of data </h3>
                 <ul class="ul-checkbox">
-                <li><input type="checkbox" name="lidar_rawdata" id="l_rawdata" value="true">
+                <li><input type="checkbox" name="lidar_raw_data" id="l_rawdata" value="true">
                 <label for="l_rawdata">Raw Data</label></li>
-                <li><input type="checkbox" name="lidar_rawgeodata" id="l_rawgeodata" value="true">
+                <li><input type="checkbox" name="lidar_raw_georeferenced_data" id="l_rawgeodata" value="true">
                 <label for="l_rawgeodata">Raw georeferenced data</label></li>
-                <li><input type="checkbox" name="lidar_rawblocktiles"  id="l_rawblocktiles" value="true">
+                <li><input type="checkbox" name="lidar_raw_block_tiles"  id="l_rawblocktiles" value="true">
                 <label for="l_rawblocktiles">Raw block tiles</label></li>
-                <li><input type="checkbox" name="lidar_adjusteddata"  id="l_adjusteddata" value="true">
+                <li><input type="checkbox" name="lidar_adjusted_data"  id="l_adjusteddata" value="true">
                 <label for="l_adjusteddata">Adjusted data</label></li>
-                <li><input type="checkbox" name="lidar_adjustedfiltereddata"  id="l_adjustedfiltereddata" value="true">
+                <li><input type="checkbox" name="lidar_adjusted_and_filtered_data"  id="l_adjustedfiltereddata" value="true">
                 <label for="l_adjustedfiltereddata">Adjusted and filtered data</label></li>
                 <li><input type="checkbox" name="lidar_delivery"  id="l_delivery" value="true">
                 <label for="l_delivery">Delivery</label></li>
                 </ul>
                 </div>
- 
             
         </div>     
     </div>
@@ -202,16 +199,12 @@
                 <label for="p_dgps">DGPS</label></li>
                 <li><input type="checkbox" name="project_aet"  id="p_aet" value="true">
                 <label for="p_aet">AET</label></li>
-                <li><input type="checkbox" name="project_tiling"  id="p_tiling" value="true">
+                <li><input type="checkbox" name="project_tilings"  id="p_tiling" value="true">
                 <label for="p_tiling">TILING</label></li>
                 </ul>
                 <h3> Project others format </h3>
-                <input type="text" name="project_text">
-                
-                    
+                <input type="text" name="project_others">
 
-
- 
             </div>
         </div>       
     
@@ -231,10 +224,11 @@
 /*************************************************** VALIDATION ********************************************************************************/
 
 /********************************************** Champ de validation ***********************************************************************/
-$Field = array('bdl','country','mission_date','n_disk'); // Field obligatoire
-$checkImg = array('image_start','image_end','image_raw','image_lv0','image_lv2','image_lv3','image_rvb','image_rvbi','image_pan','image_cir','image_geom'); // Field Image
-$checkOrtho = array('ortho_tif','ortho_ecw','ortho_jpg','ortho_rvb','ortho_rvbi','ortho_infrared','ortho_8bit','ortho_16bit','ortho_geom'); // Field Orthoimage
-$checkLidar = array('lidar_geom');  // Field Lidar
+$Field = array('bdl','storage_location','n_disk'); // Field obligatoire
+$checkImg = array('image_mission_date','image_start','image_end','image_raw','image_lv0','image_lv2','image_lv3','image_rvb','image_rvbi','image_pan','image_cir','image_geom');
+$checkOrtho = array('ortho_tif','ortho_ecw','ortho_jpg','ortho_rvb','ortho_rvbi','ortho_infrared','ortho_8bit','ortho_16bit','ortho_geom');
+$checkLidar = array('lidar_raw_data','lidar_raw_georeferenced_data','lidar_raw_block_tiles','lidar_adjusted_data','lidar_adjusted_and_filtered_data','lidar_delivery','lidar_geom');
+$checkProject = array('project_aoi','project_dgps','project_aet','project_tiling','project_others','project_geom');
 /*********************************************** ################## ***********************************************************************/
 
 
@@ -289,20 +283,32 @@ if(isset($_POST['validate'])) {
         }
     }
 
+    foreach($checkProject as $proj) {
+        if(isset($_POST[$proj])) {
+            if($_POST[$proj] != "") {
+                $data .= $proj . ",";
+                $datavalue .= "'" .$_POST[$proj] . "',";
+            }
+        }
+    }
+
+    if ($data != "") {
     // Requete d'insertion dans la table -> enleve la derniére valeur des tableau data et datavalue (une virgule)
     $req = "INSERT INTO public.prototype_table(". substr($data, 0, -1) .") VALUES(" . substr($datavalue, 0, -1) . ")";
 
     //Envoie de la requete
     $sendReq = pg_query($req);
 
+    /*
     if($sendReq) {
         echo "<span>window.alert('requete envoyé')</span>";
     }
     else {
         echo "Erreur";
     }
+    */
+    }
 }
-
 
 ?>
 
