@@ -10,7 +10,10 @@ header('Content-type: application/json');
 
 $query = "SELECT meschamps, st_asgeojson(s.the_geom) AS geometry FROM matable;";
 $rs = pg_query($dbconnect, $query) or die("La requete suivante ne peut pas etre executee : $query\n");
-
+//Construction du GeoJSON
+//Construction du GeoJSON
+//Construction du GeoJSON
+//Construction du GeoJSON
 //Construction du GeoJSON
 $geojson = array(
     'type'      => 'FeatureCollection',
