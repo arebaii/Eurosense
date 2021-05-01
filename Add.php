@@ -1,58 +1,45 @@
-
-<!--****************************** FORMULAIRE *********************************************-->
+<!--************************************* FORM ADD **************************************************-->
 
 <form action="index.php#Add" method="POST" id="Add-FORM">
 
     <div class="field"  id=Add-Format>
-    <!-- //Requete SQL -> tableaux déroulant des project ID de la table Project -->
-        <div>
-            <h3> BDL (Project ID) </h3>
-            <input type="text"  BDL (Project ID) list="idBdl" name="bdl" id="pjID">
-            <datalist id="idBdl">
+    <!-- Set Rolling table of BDL of the project table -->
+        <h2> BDL (Project ID) </h2>
+        <input type="text"  BDL (Project ID) list="idBdl" name="bdl" id="pjID">
+        <datalist id="idBdl">
+        <?php   
+            // Get result of all BDL in project table -> Connect.php Line 25
+            foreach ($BDLP as $BDLPoject) {
+                echo "<option value=" . $BDLPoject["project_id"] . ">";
+            }
+        ?>
+        </datalist>
+
+    <!-- Set select table of country of list_country table -->
+        <h2>Storage Location </h2>
+        <select name="storage_location" class="text">
             <?php   
-                foreach ($PJID as $P) {
-                    echo "<option value=" . $P["project_id"] . ">";
+                // Get result of all country in API table -> Connect.php Line 16
+                foreach ($country as $location) {
+                    echo "<option value=" . $location["country"] . ">" . $location['country'] . "</option>";
                 }
             ?>
-            </datalist>
-        </div>   
-    <!-- //Fenêtre du choix du pays -->
+        </select>
 
-        <div>
-            <h3>Storage Location </h3>
-            <select name="storage_location" class="text">
-            
-                <?php   
-                    foreach ($country as $c) {
-                        echo "<option value=" . $c["country"] . ">" . $c['country'] . "</option>";
-                    }
-                ?>
-            </select>
-        </div>
-        <!-- //Champ à remplir par l'utilisateur comportant le numéro du disk sur lequel est stocké la donnée -->
-        <div>
-            <h3> N° Disk </h3>
-            <input type="text" name="n_disk">
-        </div>
+    <!-- N° OF DISK -->
+        <h2> N° Disk </h2>
+        <input type="text" name="n_disk">
     </div>
 
 
     <div class="field" id=Add-DataType>
-    <!-- //Deux choix -> Images et Orthos
-    //Images -> LV0 / LV1 / LV2 / RAW
-    //Images.LV2 -> RGB / CIR / PAN / RGBI -->
+    <!-- FIELDS OF IMAGE DATA -->
         <div id="Add-IMG">
             <h2> Image Data </h2>            
             <div>
-                <!-- //Deux champs ou l'utilisateur doit remplir la premiére et derniére image acquise -->
                 <div>
-                    <!--
-                    //Requete 
-                     -> tableaux déroulant des dates disponible de la table mission flight
-                    //En lien avec le project ID selectionné
-                    // ET / OU BIEN : Calendar Menu -->
                     <div>
-                        <h3> Mission date </h3>
+                        <h2> Mission date </h2>
                         <select name="image_mission_date" class="text">
                         <?php/*   
                         foreach ($country as $c) {
@@ -62,7 +49,7 @@
                         </select>
                     </div>
 
-                    <!--*******Calendrier mis en place pour la premiére version
+                    <!--    ******* CALENDAR MENU *******
                         <input type="date" name="mission_date"
                             value="2021-01-01"
                             min="2018-01-01" max="2024-12-31">
@@ -78,13 +65,12 @@
                     </div>
                 </div>
 
-            <!-- //Chargement du shape -> Liens de l'éléments ? -> glissé déposé-->
                 <div>
                     <h3> Polygone shape </h3>                   
                     <input type="file" name="image_geom">
                 </div>
             </div>
-            
+
             <div id="checkIMG">
                 <div>
                 <h3> Format </h3>
@@ -116,7 +102,8 @@
             </div>
             
         </div>
-            
+
+        <!-- FIELDS OF ORTHOIMAGE DATA -->
         <div id="Add-Ortho">
             <h2> OrthoImage Data </h2>
             <div>
@@ -144,7 +131,7 @@
             <div>
                 <h3> Coding depth </h3>
                 <ul class="ul-checkbox">
-                <li><input type="checkbox" name="ortho_8bit" id="Ortho_8b" value="true">
+                <li><input type="checkbox" name="ortho_8bit" id="Ortho_"8b value="true">
                 <label for="Ortho_8b">8 bytes</label></li>
                 <li><input type="checkbox" name="ortho_16bit" id="Ortho_16b" value="true">
                 <label for="Ortho_16b">16 bytes</label></li>
@@ -154,17 +141,17 @@
             <div>
                 <div>
                 <h3> Orthoimage shape </h3>
-                <input type="file"  name="ortho_geom">
+                <input type="file" name="ortho_geom">
             </div> 
 
             <div>
                 <h3> Text </h3>
                 <input type="text" name="ortho_text">
-                <label for="file">Choose ORTHO a file</label>
             </div>
             </div>
         </div>
 
+        <!-- FIELDS OF LIDAR DATA -->
         <div id="Add-Lidar">
         <h2> Lidar Data </h2>
             
@@ -190,8 +177,9 @@
                 </div>
             
         </div>     
-    </div>
-        <div id="Add-Project">
+
+        <!-- FIELDS OF PROJECT DATA -->
+        <div class="field" id="Add-Project">
         <h2> Project </h2>
             <div>
                 <h3> Project shape </h3>
@@ -213,8 +201,7 @@
 
             </div>
         </div>       
-    
-    
+    </div>
 
     <div id="Add-submit">
         <input type="reset" value="reset">
@@ -224,37 +211,23 @@
 <?php
 
 
+/*************************************** VALIDATION METHOD => POST *********************************************/
 
-
-
-/*************************************************** VALIDATION ********************************************************************************/
-
-/********************************************** Champ de validation ***********************************************************************/
-$Field = array('bdl','storage_location','n_disk'); // Field obligatoire
+/*********** FIELDS OF VALIDATION ************/
+$Field = array('bdl','storage_location','n_disk');
 $checkImg = array('image_mission_date','image_start','image_end','image_raw','image_lv0','image_lv2','image_lv3','image_rvb','image_rvbi','image_pan','image_cir','image_geom');
 $checkOrtho = array('ortho_tif','ortho_ecw','ortho_jpg','ortho_rvb','ortho_rvbi','ortho_infrared','ortho_8bit','ortho_16bit','ortho_geom');
 $checkLidar = array('lidar_raw_data','lidar_raw_georeferenced_data','lidar_raw_block_tiles','lidar_adjusted_data','lidar_adjusted_and_filtered_data','lidar_delivery','lidar_geom');
 $checkProject = array('project_aoi','project_dgps','project_aet','project_tiling','project_others','project_geom');
-/*********************************************** ################## ***********************************************************************/
 
+//initializes variable of the request parameters
+$data = "";
+$datavalue = "";
 
-$data = ""; // Noms des champs à envoyer dans la requéte
-$datavalue = ""; // Valeur à envoyer pour chaques champs dans la requéte
-
-
-/*
-                    Vérification des élément envoyé en POST
-
-Pour chaque élément dans les tableaux "Field" / "checkImg" / "checkOrtho" / "checkLidar"
-Si L'élément est bien présent --> isset($_POST( 'nom du champ envoyé en POST' ))
-** pour les champs geom -> Et si la valeur est différentes de '' (rien)
-==> Tu rajoute au tableau actuel ' .= ' 
-    - dans $data = le nom du champ + 'virgule'
-    - dans $datavalue = la valeur du champ + 'virgule'
-*/
-
+// IF validate FORM is set
 if(isset($_POST['validate'])) {
 
+// *** ADD Name of fields and value fields in request parameters ***
     foreach($Field as $a) {
         if(isset($_POST[$a])) {
             $data .= $a . ",";
@@ -298,21 +271,14 @@ if(isset($_POST['validate'])) {
         }
     }
 
+
+/*************************************************** SEND REQUEST ********************************************************************************/
     if ($data != "") {
-    // Requete d'insertion dans la table -> enleve la derniére valeur des tableau data et datavalue (une virgule)
+
     $req = "INSERT INTO public.prototype_table(". substr($data, 0, -1) .") VALUES(" . substr($datavalue, 0, -1) . ")";
 
-    //Envoie de la requete
     $sendReq = pg_query($req);
 
-    /*
-    if($sendReq) {
-        echo "<span>window.alert('requete envoyé')</span>";
-    }
-    else {
-        echo "Erreur";
-    }
-    */
     }
 }
 
