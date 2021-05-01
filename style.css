@@ -1,4 +1,3 @@
-
 head { size: 1px;}
 
 body {
@@ -6,7 +5,6 @@ body {
     height: 100%;
     max-width: 100%;
     font-family: 'Lato', sans-serif;
-    
     background-color: #f6f6f6ff;
   }
 
@@ -16,8 +14,7 @@ body {
     background-color: #646363ff;
   }
  
-
-ul,  li{         /* li  in class=tabs */
+ul,  li{        
     margin:0;
     padding:0;
     list-style: none;
@@ -26,55 +23,18 @@ ul,  li{         /* li  in class=tabs */
 }
 
 
-
-
 a {
     text-decoration: none;
     color:inherit;
 }
 
 .page {
-
-    display: flex;
-   
-}
-
-#Menu {
-    width:40%;
-    
-
-}
-
-.field h2, .field h3{
-    margin-block-end: 0.1em;
-}
-
-.field{
-    color: #cacacaff;
-}
-
-.Add-field{
-    display: display;
-    height: 30px;
-    width: 200px;
-    margin: 5px 0%;
-    box-sizing: border-box;
-    border: 2px solid rgba(204, 204, 204, 0.514);
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
-    outline: none;
-    border-radius:5%;
-    
+   display: flex;   
 }
 
 
 
-.Add-field:focus {  
-    border: 2px solid rgb(201, 200, 200);
-    border-radius:5%;
-  }
 
-    
 
 
 /* ################ MENU ONGLET ################################################
@@ -140,7 +100,9 @@ Transition opaque --> 28min
 
 
 /* ################################ --STRUCTURE DE LA PAGE ---------- ################################ */
-
+#Menu {
+    width:40%;
+}
 
 #Map {
     width: 60%;
@@ -157,11 +119,11 @@ Transition opaque --> 28min
 
 /* ################################ -------FORMULAIRE----- ################################ */
 
+
 form {
     display:block;
     flex-flow: column no wrap; 
 }
-
 
 /* buttons */
 [type="submit"],[type="reset"]{
@@ -186,6 +148,11 @@ form {
 
 
 
+/* ################################ ------------ ################################ */
+
+
+/* ################################ -------ADD PAGE----- ################################ */
+
 
 /* fields */
 [type="text"] , [type="imput"], .text {
@@ -200,13 +167,27 @@ form {
     border-radius: 5%;
     text-align: left; } 
 
-.field, #Add-Lidar, #Add-Project, #Add-submit{     /*mother div */
+
+
+    
+/* div parentes du format, datatype, project */ 
+
+.field h2, .field h3{
+    margin-block-end: 0.1em;
+}
+
+.field{
+    color: #cacacaff;
+}
+
+
+.field, #Add-DataType, #Add-Lidar, #Add-Project, #Add-submit{     /*mother div */
     display: block;
-    border:3px solid;
+    border:3px solid; /* A SUPP FIN */
     /*border-color: coral; */
 }
 
-#Add-Format, #Add-Lidar, #Add-Project, #Add-submit
+#Add-Format, #Add-Lidar, #Add-Project, #Add-submit   /* ADD DATATYPE  PAS EN FLEX: CHANGER??  */
 {
     display:flex;
     border: 1px solid;
@@ -222,11 +203,13 @@ form {
     justify-content: space-between
   }
   
-  #Add-Ortho > h2, #Add-IMG>h2 , #Add-Lidar>h2{
+  h2 {
+      display:grid;
     width: 100%;
     color:#646363ff;
-    justify-content: center;
+    justify-content: center !important;
   }
+  
 
   #Add-IMG>div, #Add-IMG > #checkIMG > div, #Add-Ortho > div {     /*  les div sont cote à cote avec les check en colonne*/
     display: flex;
@@ -312,3 +295,46 @@ ul.ul-checkbox  li input[type="checkbox"] {
     opacity: 0;
   }
  
+
+
+
+
+/* ################################ ------------ ################################ */
+
+
+/* ################################ --SEARCH PAGE ---------- ################################ */
+table {
+    border: medium solid #000000;
+  }
+  
+  thead{
+      color:#fff;
+      background-color:dimgray
+  } 
+  
+  .t {
+      background-color: rgb(0, 141, 19);
+  }
+  
+  .f {
+      background-color: rgb(141, 0, 0);
+  }
+  
+  button {
+      background-color: #1f7496;
+      border: none;
+      color: white;
+      padding: 10px 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+  }
+  
+  button:hover {
+      box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+  
+  h3 span {
+      color:green;
+  }
