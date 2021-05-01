@@ -34,7 +34,7 @@ Connexion BDD postgres
 
 <!--tuto : https://grafikart.fr/tutoriels/tp-tabs-776 -->
 <div class=page>
-        <div id=Menu>
+    <div id=Menu>
         
         <ul class="tabs">
             <li class="active"><a href="#Add"> <img alt="icone add" src="icons/add.png" class="icone" id="img_add"> Add </a></li>
