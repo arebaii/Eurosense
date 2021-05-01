@@ -4,7 +4,6 @@ var form_add = document.getElementById("Add-FORM");
 let submit = form_add.elements['validate'];
 form_add.addEventListener('input', Validate);
 
-
 function Validate () {
   
   var field_BDL = form_add.elements["bdl"];
@@ -33,3 +32,9 @@ function Validate () {
     submit.disabled=false;
   }
 }
+
+/*
+var form_search = document.getElementById("Search-FORM");
+let submit = form_search.elements['validate'];
+search_add.addEventListener('input', Validate);
+*/

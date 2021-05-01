@@ -13,29 +13,28 @@
     crossorigin=""></script>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-    
     <link rel = "icon" href = "./icons/icon.png" type = "image/x-icon">
 </head>
 <body>
 
-
-<!-- Authentification
+<!-- Authentification -->
 <?php// include "Auth.php" ?>
 
-Connexion BDD postgres 
+<?php
+//Comment this line if you want to desactivate connection
+include "Connect.php"
+?>
 
---> 
-<?php include "Connect.php" ?>  
 
 <div id="logo">  <p>
     <img alt= "logo" src="./icons/logo_v2.png" id="logo"> </p>
 </div>
 
 
-<!--tuto : https://grafikart.fr/tutoriels/tp-tabs-776 -->
+<!-- tuto : https://grafikart.fr/tutoriels/tp-tabs-776 -->
 <div class=page>
-    <div id=Menu>
-        
+        <!-- Tabs function -> "tabs.js" -->
+        <div id=Menu>
         <ul class="tabs">
             <li class="active"><a href="#Add"> <img alt="icone add" src="icons/add.png" class="icone" id="img_add"> Add </a></li>
             <li><a href="#Edit"> <img alt="icone edit" src="icons/edit.png" class="icone" id="img_edit">Edit </a></li>
@@ -47,7 +46,7 @@ Connexion BDD postgres
         </ul>
         <div class="tabs-content">
             <div class="tab-content active" id="Add">
-                <?php include "Add.php" ?>
+                <?php include "Add_v5.php" ?>
             </div>
             <div class="tab-content" id="Edit"> 
                 <?php include "Edit.php" ?>
@@ -63,8 +62,8 @@ Connexion BDD postgres
 
         <div id="Map">
         </div>
-
-</div>    
+      
+</div>  
 
 </body>
 <script src="leaflet.js"></script>
