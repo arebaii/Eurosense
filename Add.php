@@ -1,34 +1,39 @@
-<!-- je fais un test ici -->
+
 <!--****************************** FORMULAIRE *********************************************-->
 
 <form action="index.php#Add" method="POST" id="Add-FORM">
 
     <div class="field"  id=Add-Format>
     <!-- //Requete SQL -> tableaux déroulant des project ID de la table Project -->
-        <h2> BDL (Project ID) </h2>
-        <input type="text"  BDL (Project ID) list="idBdl" name="bdl" id="pjID">
-        <datalist id="idBdl">
-        <?php   
-            foreach ($PJID as $P) {
-                echo "<option value=" . $P["project_id"] . ">";
-            }
-        ?>
-        </datalist>
-
-    <!-- //Fenêtre du choix du pays -->
-
-        <h2>Storage Location </h2>
-        <select name="storage_location" class="text">
-        
+        <div>
+            <h3> BDL (Project ID) </h3>
+            <input type="text"  BDL (Project ID) list="idBdl" name="bdl" id="pjID">
+            <datalist id="idBdl">
             <?php   
-                foreach ($country as $c) {
-                    echo "<option value=" . $c["country"] . ">" . $c['country'] . "</option>";
+                foreach ($PJID as $P) {
+                    echo "<option value=" . $P["project_id"] . ">";
                 }
             ?>
-        </select>
+            </datalist>
+        </div>   
+    <!-- //Fenêtre du choix du pays -->
+
+        <div>
+            <h3>Storage Location </h3>
+            <select name="storage_location" class="text">
+            
+                <?php   
+                    foreach ($country as $c) {
+                        echo "<option value=" . $c["country"] . ">" . $c['country'] . "</option>";
+                    }
+                ?>
+            </select>
+        </div>
         <!-- //Champ à remplir par l'utilisateur comportant le numéro du disk sur lequel est stocké la donnée -->
-        <h2> N° Disk </h2>
-        <input type="text" name="n_disk">
+        <div>
+            <h3> N° Disk </h3>
+            <input type="text" name="n_disk">
+        </div>
     </div>
 
 
@@ -47,7 +52,7 @@
                     //En lien avec le project ID selectionné
                     // ET / OU BIEN : Calendar Menu -->
                     <div>
-                        <h2> Mission date </h2>
+                        <h3> Mission date </h3>
                         <select name="image_mission_date" class="text">
                         <?php/*   
                         foreach ($country as $c) {
@@ -139,7 +144,7 @@
             <div>
                 <h3> Coding depth </h3>
                 <ul class="ul-checkbox">
-                <li><input type="checkbox" name="ortho_8bit" id="Ortho_"8b value="true">
+                <li><input type="checkbox" name="ortho_8bit" id="Ortho_8b" value="true">
                 <label for="Ortho_8b">8 bytes</label></li>
                 <li><input type="checkbox" name="ortho_16bit" id="Ortho_16b" value="true">
                 <label for="Ortho_16b">16 bytes</label></li>
@@ -149,12 +154,13 @@
             <div>
                 <div>
                 <h3> Orthoimage shape </h3>
-                <input type="file" name="ortho_geom">
+                <input type="file"  name="ortho_geom">
             </div> 
 
             <div>
                 <h3> Text </h3>
                 <input type="text" name="ortho_text">
+                <label for="file">Choose ORTHO a file</label>
             </div>
             </div>
         </div>
@@ -185,7 +191,7 @@
             
         </div>     
     </div>
-        <div class="field" id="Add-Project">
+        <div id="Add-Project">
         <h2> Project </h2>
             <div>
                 <h3> Project shape </h3>
