@@ -46,7 +46,7 @@ include "Connect.php"
         </ul>
         <div class="tabs-content">
             <div class="tab-content active" id="Add">
-                <?php include "Add_v5.php" ?>
+                <?php include "Add.php" ?>
             </div>
             <div class="tab-content" id="Edit"> 
                 <?php include "Edit.php" ?>
