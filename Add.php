@@ -79,13 +79,15 @@
                 </div>
 
             <!-- //Chargement du shape -> Liens de l'éléments ? -> glissé déposé-->
+                
+            </div>
+            
+            <div id="checkIMG">
                 <div>
                     <h3> Polygone shape </h3>                   
                     <input type="file" name="image_geom">
                 </div>
-            </div>
-            
-            <div id="checkIMG">
+                
                 <div>
                 <h3> Format </h3>
                 <ul class="ul-checkbox">
@@ -191,7 +193,7 @@
             
         </div>     
     </div>
-        <div id="Add-Project">
+        <div class="field" id="Add-Project">
         <h2> Project </h2>
             <div>
                 <h3> Project shape </h3>

@@ -157,7 +157,7 @@ form {
 /* fields */
 [type="text"] , [type="imput"], .text {
      height: 30px; 
-    width: 200px;
+    width: calc(12vw);
     margin: 5px 0%;
     box-sizing: border-box;
     border: 2px solid rgba(204, 204, 204, 0.514);
@@ -172,9 +172,6 @@ form {
     
 /* div parentes du format, datatype, project */ 
 
-.field h2, .field h3{
-    margin-block-end: 0.1em;
-}
 
 .field{
     color: #cacacaff;
@@ -191,11 +188,9 @@ form {
 {
     display:flex;
     border: 1px solid;
-    /*border-color: cyan;*/}
+    justify-content: space-around;
+   }
 
-
-/* tuto flexbox : https://developer.mozilla.org/fr/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox */    
-/*Add-ortho*/
 
 #Add-Ortho, #Add-IMG, #Add-IMG>div:first-of-type {
     display: flex;
@@ -209,20 +204,25 @@ form {
     color:#646363ff;
     justify-content: center !important;
   }
-  
+ 
 
-  #Add-IMG>div, #Add-IMG > #checkIMG > div, #Add-Ortho > div {     /*  les div sont cote à cote avec les check en colonne*/
+   #Add-IMG > #checkIMG  {     /*  les div sont cote à cote avec les check en colonne*/
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    width: 90%;
   }
 
   #Add-IMG > div:first-of-type { 
-    display: block;
+    display: flex;
+    width: 100%;
   }
 
   #Add-IMG > div:first-of-type > div:first-of-type { /*start end */
     display: flex;
-  }
+    justify-content: space-around;
+    width: 100%;
+}
 
 
   #Add-Lidar >div{
@@ -233,20 +233,22 @@ form {
     flex-direction: row !important;
   }
 
-  /*checkbox */
 
+  /*checkbox */
 
   ul.ul-checkbox {
     list-style: none;
-    
+    display:table;
+    table-layout: fixed;
   }
 
   .ul-checkbox li {         /* size */
-    height: 30px; 
+    height: 29px; 
+    display:table-row;
   }
   
   .ul-checkbox li label {
- 
+    display: table-cell;
     background-color: white;
     border: 1px solid rgba(139, 139, 139, .3);
     color: black;
@@ -258,7 +260,7 @@ form {
     user-select: none;
     -webkit-tap-highlight-color: transparent;
     transition: all .2s;
-    padding: 8px 12px;
+    padding:5px 4px 3px 4px;
     cursor: pointer;
     }
 
@@ -268,9 +270,10 @@ ul.ul-checkbox li label::before {
     font-variant: normal;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
-    padding: 15% 6px 2px 2px;
+    padding: 5px 4px 3px 4px;
     content: "+";
     transition: transform .1s ease-in-out;
+    
 }
 
 ul.ul-checkbox li input[type="checkbox"]:checked + label::before {
@@ -281,7 +284,8 @@ ul.ul-checkbox li input[type="checkbox"]:checked + label::before {
 
 ul.ul-checkbox li input[type="checkbox"]:checked + label{
     
-    background-color: #2c9637ff;
+    background-color: #2c9637ff; 
+    border: 1px solid white;
     color: white;
     transition: all .2s;
 
@@ -290,6 +294,7 @@ ul.ul-checkbox li input[type="checkbox"]:checked + label{
 ul.ul-checkbox  li input[type="checkbox"] {
     display: absolute;
   }
+
   ul.ul-checkbox  li input[type="checkbox"] {
     position: absolute;
     opacity: 0;
