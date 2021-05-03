@@ -43,7 +43,7 @@ Transition normal appliqué >
 Transition opaque --> 28min
 */
 
-#ASES { /* DIV A MOFIFIER UNE FOIS LE CODE FINI */
+#ASES { 
     color:rgb(18, 0, 175);
 }
 .tabs li, .tabsDT li{
@@ -126,7 +126,7 @@ form {
 }
 
 /* buttons */
-[type="submit"],[type="reset"]{
+[type="submit"]{
     background-color:#3d8643;
     color: white;
     border: none;
@@ -140,10 +140,29 @@ form {
     outline : none;
             }
 
-  [type="reset"]:active , [type="submit"]:active {
+[type="reset"] {
+    background-color: #646363ff;
+    color: white;
+    border: none;
+    padding: 8px 10px;
+    margin: 2px;
+    border-radius: 8%;
+    cursor: pointer;
+    
+    box-shadow: inset 1px 1px 3px rgb(255 255 255 / 60%), 
+                inset -1px -1px 3px rgb(0 0 0 / 60%);
+    outline : none;
+
+}
+
+[type="submit"]:active {
     background-color: #57c160
   }
 
+  [type="reset"]:active {
+background-color: rgb(145, 145, 145)
+
+  }
 /*choisir fichiers */
 
 
@@ -157,7 +176,7 @@ form {
 /* fields */
 [type="text"] , [type="imput"], .text {
      height: 30px; 
-    width: 200px;
+    width: calc(12vw);
     margin: 5px 0%;
     box-sizing: border-box;
     border: 2px solid rgba(204, 204, 204, 0.514);
@@ -174,26 +193,24 @@ form {
 
 
 .field{
-    color: #cacacaff;
+    
+    color: #646363ff;
 }
 
 
 .field, #Add-DataType, #Add-Lidar, #Add-Project, #Add-submit{     /*mother div */
     display: block;
     border:3px solid; /* A SUPP FIN */
-    /*border-color: coral; */
+    
 }
 
-#Add-Format, #Add-Lidar, #Add-Project, #Add-submit   /* ADD DATATYPE  PAS EN FLEX: CHANGER??  */
+#Add-Format, #Add-Lidar, #Add-Project, #Add-submit   
 {
     display:flex;
     border: 1px solid;
     justify-content: space-around;
-    /*border-color: cyan;*/}
+   }
 
-
-/* tuto flexbox : https://developer.mozilla.org/fr/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox */    
-/*Add-ortho*/
 
 #Add-Ortho, #Add-IMG, #Add-IMG>div:first-of-type {
     display: flex;
@@ -236,20 +253,22 @@ form {
     flex-direction: row !important;
   }
 
-  /*checkbox */
 
+  /*checkbox */
 
   ul.ul-checkbox {
     list-style: none;
-    
+    display:table;
+    width: 137px;
   }
 
   .ul-checkbox li {         /* size */
     height: 29px; 
+    display:table-row;
   }
   
   .ul-checkbox li label {
- 
+    display: table-cell;
     background-color: white;
     border: 1px solid rgba(139, 139, 139, .3);
     color: black;
@@ -261,7 +280,7 @@ form {
     user-select: none;
     -webkit-tap-highlight-color: transparent;
     transition: all .2s;
-    padding: 8px 12px;
+    padding:5px 4px 3px 4px;
     cursor: pointer;
     }
 
@@ -271,7 +290,7 @@ ul.ul-checkbox li label::before {
     font-variant: normal;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
-    padding: 15% 6px 2px 2px;
+    padding: 5px 4px 3px 4px;
     content: "+";
     transition: transform .1s ease-in-out;
     
@@ -295,6 +314,7 @@ ul.ul-checkbox li input[type="checkbox"]:checked + label{
 ul.ul-checkbox  li input[type="checkbox"] {
     display: absolute;
   }
+
   ul.ul-checkbox  li input[type="checkbox"] {
     position: absolute;
     opacity: 0;
