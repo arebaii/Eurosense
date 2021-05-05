@@ -346,7 +346,6 @@ width: 100% !important;
   background-color: #57c160
 }
 [type="submit"]:disabled {
-
   background-color:rgba(143, 143, 143, 0.623);
 }
 
