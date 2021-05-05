@@ -1,15 +1,8 @@
 
-<<<<<<< HEAD
 //Set map
 let map = L.map('Map').setView([50, 10], 4);
 
 //ADD Leaflet layer -> Basemap with 2 types of layers.
-=======
-let map = L.map('Map').setView([50, 10], 4);
-
-
-//applique la couche récupéré sur featlet provider.
->>>>>>> 5316ba74bf989ba975f61ec85a706d1deced87c7
 var basemaps = {
 	Places: L.tileLayer.wms('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png', {
         maxZoom: 20,
@@ -29,18 +22,13 @@ L.control.layers(basemaps).addTo(map);
 
 basemaps.Places.addTo(map);
 
-<<<<<<< HEAD
 // Set layer geometry for project
-=======
-// intialise le geojson
->>>>>>> 5316ba74bf989ba975f61ec85a706d1deced87c7
 var ProjectLayer = L.geoJson("", {
     style: style,
     onEachFeature: onEachFeature
 });
 
 
-<<<<<<< HEAD
 /******************************** PROPRIETY OF LAYER ********************************/
 
 //Function to set style to layer
@@ -50,21 +38,11 @@ function style(feature) {
         weight: 1,
         opacity: 0.7,
         color: '#8d0000',
-=======
-//Function to set style to layer
-function style(feature) {
-    return {
-        fillColor: 'red',
-        weight: 3,
-        opacity: 0.6,
-        color: 'red',
->>>>>>> 5316ba74bf989ba975f61ec85a706d1deced87c7
         fillOpacity: 0.3
     };
 }
 
 
-<<<<<<< HEAD
 //ADD POPUP ON CLICK for each geometry
 function functionOnclick (event){
     var layer = event.target;
@@ -158,42 +136,16 @@ function functionOnclick (event){
     L.popup()
     .setLatLng(layer.getCenter())
     .setContent(content)
-=======
-
-//Test fonction
-//ajoute l'alerte avec comme donnée l'élément nom de l'event
-function functionOnclick (event){
-    var layer = event.target;
-    console.log(layer.feature.properties.name);
-    L.popup()
-    .setLatLng(layer.getCenter())
-    .setContent("<h2> project_name :" + layer.feature.properties.name + "</h2>"+
-                "<h2> project_id : " + layer.feature.properties.id + "</h2>")
->>>>>>> 5316ba74bf989ba975f61ec85a706d1deced87c7
     .addTo(jsonLayer);
 }
 
 
-<<<<<<< HEAD
 // Set HOVER function 
-=======
-
-/*Ajout d'intéraction :
-accès au calque qui a été survolé via e.target, 
-définissons une épaisse bordure grise sur le calque comme effet de surbrillance, 
-en l'amenant également à l'avant afin que la bordure ne soit pas en conflit avec les états proches 
-(mais pas pour IE , Opera ou Edge, car ils ont des problèmes pour faire bringToFront au survol de la souris). */
-
->>>>>>> 5316ba74bf989ba975f61ec85a706d1deced87c7
 function highlightFeature(e) {
     var layer = e.target;
 
     layer.setStyle({
         weight: 5,
-<<<<<<< HEAD
-=======
-        color: 'blue',
->>>>>>> 5316ba74bf989ba975f61ec85a706d1deced87c7
         fillOpacity: 0.6
     });
 
@@ -203,7 +155,6 @@ function highlightFeature(e) {
 }
 
 
-<<<<<<< HEAD
 //Reset style to target of event
 function resetHighlight(e) {
     var layer = e.target;
@@ -216,20 +167,6 @@ function resetHighlight(e) {
 
 //Add event to layers
 function onEachFeature(feature, layer) {
-=======
-//Lorsqu'on enlevé la souris de l'éléement -> resetStyle
-function resetHighlight(e) {
-    ProjectLayer.resetStyle(e.target);
-}
-
-//Applique les évenement de souris
-function onEachFeature(feature, layer) {
-
-    //test log pour chaque nom de feature et les couches/calque associé
-    console.log(feature.properties.name, layer);
-
-    //sur chaqu'un des calques on applique les événements :
->>>>>>> 5316ba74bf989ba975f61ec85a706d1deced87c7
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
@@ -238,7 +175,6 @@ function onEachFeature(feature, layer) {
 }
 
 
-<<<<<<< HEAD
 
 /************************************* ADD GEOMETRY OF RESEARCH *****************************************************/
 //Add Image Geometry of research result
@@ -357,5 +293,3 @@ TableLine_D.forEach(function ReSearchGeom(line) {
 
 
 
-=======
->>>>>>> 5316ba74bf989ba975f61ec85a706d1deced87c7
