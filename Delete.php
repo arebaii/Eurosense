@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!--************************************* FORM DELETE **************************************************-->
 <form action="index.php#Delete" method="POST" id="Delete-FORM">
     <div class="field"  id=Delete-BDL>
@@ -572,3 +573,10 @@ if(isset($_POST['validateDelete'])) {
 }
 ?>
 </form>
+=======
+<div id=D-id><p>
+<?php //Fenétre de selection de la mission à supprimer:
+echo "Supprimer la mission d'id :";
+?>
+</p></div>
+>>>>>>> 5316ba74bf989ba975f61ec85a706d1deced87c7
